@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "fabpot/goutte": "^4.0",
         "illuminate/contracts": "^8.37",
         "masterminds/html5": "^2.7",
