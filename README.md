@@ -31,7 +31,13 @@ This is the contents of the published config file:
 
 ```php
 return [
+    // How often to update feeds from sources, in minutes
+    'default_update_frequency' => 60,
+
+    // Feed index web route
+    'url' => '/',
 ];
+
 ```
 
 Add a new disk to your `config/filesystems.php` file, to define where the generated RSS feeds will be stored:
