@@ -22,7 +22,7 @@
     </head>
     <body class="antialiased">
         <div class="flex justify-center">
-            <h1>47374.info Feeds</h1>
+            <h1>@yield('title', config('app.name'))</h1>
         </div>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
