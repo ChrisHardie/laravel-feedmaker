@@ -19,7 +19,6 @@ class FeedmakerServiceProvider extends PackageServiceProvider
             ->name('feedmaker')
             ->hasConfigFile()
             ->hasViews()
-            ->hasRoute('web')
             ->hasMigration('create_feedmaker_table')
             ->hasCommand(FeedmakerCommand::class);
     }

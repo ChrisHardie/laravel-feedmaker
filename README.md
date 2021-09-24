@@ -18,13 +18,13 @@ composer require chrishardie/laravel-feedmaker
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="ChrisHardie\Feedmaker\FeedmakerServiceProvider" --tag="laravel-feedmaker-migrations"
+php artisan vendor:publish --provider="ChrisHardie\Feedmaker\FeedmakerServiceProvider" --tag="feedmaker-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="ChrisHardie\Feedmaker\FeedmakerServiceProvider" --tag="laravel-feedmaker-config"
+php artisan vendor:publish --provider="ChrisHardie\Feedmaker\FeedmakerServiceProvider" --tag="feedmaker-config"
 ```
 
 This is the contents of the published config file:
