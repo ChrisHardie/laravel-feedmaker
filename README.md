@@ -34,6 +34,11 @@ return [
 ];
 ```
 
+To display an index of available feeds, configure the `$url` variable in the config file and add the following to your `routes/web.php` file:
+
+```php
+Route::feedsindex();
+```
 ## Usage
 
 ```php
