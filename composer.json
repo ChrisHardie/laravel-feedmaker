@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "chrishardie/laravel-feedmaker",
+    "description": "Laravel package to enable crawling/parsing HTML pages and generating corresponding RSS feeds",
     "keywords": [
-        ":vendor_name",
+        "ChrisHardie",
         "laravel",
-        ":package_slug"
+        "laravel-feedmaker"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/chrishardie/laravel-feedmaker",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Chris Hardie",
+            "email": "chris@chrishardie.com",
             "role": "Developer"
         }
     ],
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "ChrisHardie\\LaravelFeedmaker\\": "src",
+            "ChrisHardie\\LaravelFeedmaker\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "ChrisHardie\\LaravelFeedmaker\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "ChrisHardie\\LaravelFeedmaker\\LaravelFeedmakerServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "LaravelFeedmaker": "ChrisHardie\\LaravelFeedmaker\\LaravelFeedmakerFacade"
             }
         }
     },

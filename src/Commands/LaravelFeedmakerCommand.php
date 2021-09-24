@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace ChrisHardie\LaravelFeedmaker\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelFeedmakerCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-feedmaker';
 
     public $description = 'My command';
 
