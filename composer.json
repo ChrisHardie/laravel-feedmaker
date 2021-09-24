@@ -4,7 +4,10 @@
     "keywords": [
         "ChrisHardie",
         "laravel",
-        "laravel-feedmaker"
+        "laravel-feedmaker",
+        "rss",
+        "scraping",
+        "feeds"
     ],
     "homepage": "https://github.com/chrishardie/laravel-feedmaker",
     "license": "MIT",
@@ -18,7 +21,6 @@
     "require": {
         "php": "^7.4",
         "fabpot/goutte": "^4.0",
-        "illuminate/contracts": "^8.37",
         "masterminds/html5": "^2.7",
         "spatie/laravel-package-tools": "^1.4.3"
     },
