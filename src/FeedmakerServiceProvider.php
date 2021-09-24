@@ -2,11 +2,11 @@
 
 namespace ChrisHardie\Feedmaker;
 
+use ChrisHardie\Feedmaker\Commands\FeedmakerCommand;
 use ChrisHardie\Feedmaker\Http\SourceController;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ChrisHardie\Feedmaker\Commands\FeedmakerCommand;
 
 class FeedmakerServiceProvider extends PackageServiceProvider
 {
@@ -25,7 +25,7 @@ class FeedmakerServiceProvider extends PackageServiceProvider
             ->hasCommand(FeedmakerCommand::class);
     }
 
-    public function packageRegistered() :void
+    public function packageRegistered(): void
     {
         $this->registerRouteMacro();
     }

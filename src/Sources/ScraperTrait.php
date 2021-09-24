@@ -8,17 +8,18 @@ use Symfony\Component\DomCrawler\Crawler;
 
 trait ScraperTrait
 {
-    abstract public function parse(Crawler $crawler, Source $source) : RssItemCollection;
+    abstract public function parse(Crawler $crawler, Source $source): RssItemCollection;
 
     /**
      * @param Source $source
      * @return RssItemCollection|false
      * @throws SourceNotCrawlable
      */
-    public function generateRssItems(Source $source) : RssItemCollection
+    public function generateRssItems(Source $source): RssItemCollection
     {
         try {
             $crawler = $this->getCrawler($source);
+
             return $this->parse($crawler, $source);
         } catch (\Exception $e) {
             throw new SourceNotCrawlable(

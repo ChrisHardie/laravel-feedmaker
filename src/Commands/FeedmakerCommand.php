@@ -52,7 +52,8 @@ class FeedmakerCommand extends Command
         foreach ($sources as $source) {
             $source_class_path = $source_class_base_path . $source->class_name . '\\' . $source->class_name;
             if (class_exists($source_class_path)) {
-                $source_class = new $source_class_path;
+                $source_class = new $source_class_path();
+
                 try {
                     $rssItems = $source_class->generateRssItems($source);
                     $source_class->writeRssItemsToFile($rssItems, $source);

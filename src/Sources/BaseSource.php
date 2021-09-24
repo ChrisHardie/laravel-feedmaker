@@ -69,6 +69,7 @@ abstract class BaseSource
 
         try {
             $client = new Client();
+
             return $client->request('GET', $url);
         } catch (\Exception $e) {
             throw new SourceNotCrawlable(
