@@ -66,18 +66,99 @@ To display an index of available feeds, configure the `$url` variable in the con
 ```php
 Route::feedsindex();
 ```
+
+If you want to get notices about issues related to updating the feeds from sources, make sure you define a logging destination. For example, to receive Slack notifications, make sure `LOG_SLACK_WEBHOOK_URL` is defined in `.env` and then set your `LOG_CHANNEL` to include a log stack that includes Slack.
+
 ## Usage
 
-```php
-$feedmaker = new ChrisHardie\Feedmaker();
-echo $feedmaker->echoPhrase('Hello, ChrisHardie!');
-```
+There are two steps for adding a new source to be included:
 
-## Testing
+1. Create a new Source model. If you don't have an admin interface, you can do this via tinker:
 
 ```bash
-composer test
+$ artisan tinker
+>>> $s = new ChrisHardie\Feedmaker\Models\Source
+>>> $s->class_name = 'YourSource'
+>>> $s->source_url = 'https://www.example.com/news'
+>>> $s->name = 'Source Name'
+>>> $s->home_url = 'https://example.com/'
+>>> $s->save();
 ```
+
+This tells the application the basic info about your source including the PHP class that will define how to scrape/crawl it, the URL to crawl, and the human-facing name and main URL.
+
+2. Create a source class in `app/Sources/YourSource/YourSource.php` that defines a `generateRssItems()` method returning a collection of items to include in the RSS feed. Here's an example:
+
+```php
+<?php
+
+namespace App\Sources\YourSource;
+
+use ChrisHardie\Feedmaker\Sources\BaseSource;
+use ChrisHardie\Feedmaker\Sources\RssItemCollection;
+use ChrisHardie\Feedmaker\Models\Source;
+
+class YourSource extends BaseSource
+{
+    /**
+     * @param Source $source
+     * @return RssItemCollection
+     * @throws \JsonException
+     * @throws SourceNotCrawlable
+     */
+    public function generateRssItems(Source $source) : RssItemCollection
+    {
+        $items = array();
+        $html = HTTP::get($source->source_url);
+        ...
+        return RssItemCollection::make($items);    
+    }
+}
+```
+
+If you will be scraping a URL's dom via CSS or XPath selectors, you can use the scraper trait to simplify this. It handles the generateRssItems method for you, and all you have to do is define a `parsse()` method that returns an RssItemCollection:
+
+```php
+<?php
+
+namespace App\Sources\YourSource;
+
+use ChrisHardie\Feedmaker\Sources\BaseSource;
+use ChrisHardie\Feedmaker\Sources\RssItemCollection;
+use ChrisHardie\Feedmaker\Models\Source;
+
+class YourSource extends BaseSource
+{
+    use ScraperTrait;
+
+    /**
+     * @throws SourceNotCrawlable
+     */
+    public function parse(Crawler $crawler, Source $source) : RssItemCollection
+    {
+        $items = array();
+        $nodes = $crawler->filter('.news-items');
+        foreach ($nodes as $node) {
+            ...
+        }
+        return RssItemCollection::make($items);
+    }
+```
+
+The RssItemCollection must contain the following keys for each item:
+
+* pubDate: Carbon date object
+* title: string
+* url: string
+* description: string
+
+Then, you can force a check of your source and generate a corresponding feed:
+
+`$ artisan feeds:update YourSource`
+
+View the result at `https://yoursite.com/feeds/yoursource.rss`
+
+An index of all generated feeds should be available at the URI defined in the config file.
 
 ## Changelog
 
@@ -85,16 +166,11 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Issues and Pull Requests are welcome.
 
 ## Credits
 
 - [Chris Hardie](https://github.com/ChrisHardie)
-- [All Contributors](../../contributors)
 
 ## License
 
