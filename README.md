@@ -12,7 +12,8 @@ Laravel package to enable crawling/parsing HTML pages and generating correspondi
 You can install the package via composer:
 
 ```bash
-composer require chrishardie/laravel-feedmaker
+composer config repositories.laravel-feedmaker vcs https://github.com/ChrisHardie/laravel-feedmaker.git
+composer require chrishardie/laravel-feedmaker:dev-main
 ```
 
 You can publish and run the migrations with:
