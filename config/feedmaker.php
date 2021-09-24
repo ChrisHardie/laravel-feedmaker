@@ -5,5 +5,5 @@ return [
     'default_update_frequency' => 60,
 
     // Feed index web route
-    'index_route' => '/',
+    'url' => '/',
 ];
