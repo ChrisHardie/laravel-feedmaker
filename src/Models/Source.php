@@ -12,25 +12,25 @@ class Source extends Model
 {
     use HasFactory;
 
-    protected $appends = array(
+    protected $appends = [
         'rss_filename',
-    );
+    ];
 
-    protected $fillable = array(
+    protected $fillable = [
         'fail_count',
         'last_check_at',
         'last_succeed_at',
         'last_fail_at',
         'last_fail_reason',
         'next_check_after',
-    );
+    ];
 
-    protected $dates = array(
+    protected $dates = [
         'last_check_at',
         'last_succeed_at',
         'last_fail_at',
         'next_check_after',
-    );
+    ];
 
     public function getBaseUrlAttribute($value)
     {
@@ -89,6 +89,7 @@ class Source extends Model
                     Carbon::now()
                 );
         });
+
         return $query;
     }
 }

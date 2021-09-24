@@ -2,9 +2,9 @@
 
 namespace ChrisHardie\Feedmaker\Tests;
 
+use ChrisHardie\Feedmaker\FeedmakerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ChrisHardie\Feedmaker\FeedmakerServiceProvider;
 
 class TestCase extends Orchestra
 {
