@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisHardie\LaravelFeedmaker\Database\Factories;
+namespace ChrisHardie\Feedmaker\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

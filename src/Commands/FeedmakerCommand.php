@@ -1,12 +1,12 @@
 <?php
 
-namespace ChrisHardie\LaravelFeedmaker\Commands;
+namespace ChrisHardie\Feedmaker\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelFeedmakerCommand extends Command
+class FeedmakerCommand extends Command
 {
-    public $signature = 'laravel-feedmaker';
+    public $signature = 'feedmaker';
 
     public $description = 'My command';
 

@@ -1,5 +1,5 @@
 <?php
 
-use ChrisHardie\LaravelFeedmaker\Tests\TestCase;
+use ChrisHardie\Feedmaker\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

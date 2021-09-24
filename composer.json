@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ChrisHardie\\LaravelFeedmaker\\": "src",
-            "ChrisHardie\\LaravelFeedmaker\\Database\\Factories\\": "database/factories"
+            "ChrisHardie\\Feedmaker\\": "src",
+            "ChrisHardie\\Feedmaker\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ChrisHardie\\LaravelFeedmaker\\Tests\\": "tests"
+            "ChrisHardie\\Feedmaker\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ChrisHardie\\LaravelFeedmaker\\LaravelFeedmakerServiceProvider"
+                "ChrisHardie\\Feedmaker\\FeedmakerServiceProvider"
             ],
             "aliases": {
-                "LaravelFeedmaker": "ChrisHardie\\LaravelFeedmaker\\LaravelFeedmakerFacade"
+                "Feedmaker": "ChrisHardie\\Feedmaker\\FeedmakerFacade"
             }
         }
     },

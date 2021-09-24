@@ -1,10 +1,10 @@
 <?php
 
-namespace ChrisHardie\LaravelFeedmaker\Tests;
+namespace ChrisHardie\Feedmaker\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ChrisHardie\LaravelFeedmaker\LaravelFeedmakerServiceProvider;
+use ChrisHardie\Feedmaker\FeedmakerServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'ChrisHardie\\LaravelFeedmaker\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'ChrisHardie\\Feedmaker\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelFeedmakerServiceProvider::class,
+            FeedmakerServiceProvider::class,
         ];
     }
 

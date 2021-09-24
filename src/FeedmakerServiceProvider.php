@@ -1,12 +1,12 @@
 <?php
 
-namespace ChrisHardie\LaravelFeedmaker;
+namespace ChrisHardie\Feedmaker;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ChrisHardie\LaravelFeedmaker\Commands\LaravelFeedmakerCommand;
+use ChrisHardie\Feedmaker\Commands\FeedmakerCommand;
 
-class LaravelFeedmakerServiceProvider extends PackageServiceProvider
+class FeedmakerServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,11 @@ class LaravelFeedmakerServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-feedmaker')
+            ->name('feedmaker')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel-feedmaker_table')
-            ->hasCommand(LaravelFeedmakerCommand::class);
+            ->hasRoute('web')
+            ->hasMigration('create_feedmaker_table')
+            ->hasCommand(FeedmakerCommand::class);
     }
 }
