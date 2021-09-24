@@ -34,6 +34,26 @@ return [
 ];
 ```
 
+Add a new disk to your `config/filesystems.php` file, to define where the generated RSS feeds will be stored:
+
+```php
+    'disks' => [
+        ...
+        'feedmaker' => [
+            'driver' => 'local',
+            'root' => storage_path('app/feeds'),
+            'url' => env('APP_URL').'/feeds',
+            'visibility' => 'public',
+        ],
+        ...
+    'links' => [
+        ...
+        public_path('feeds') => storage_path('app/feeds'),
+
+```
+
+Then, run `artisan storage:link` to make sure the storage disk is in place.
+
 To display an index of available feeds, configure the `$url` variable in the config file and add the following to your `routes/web.php` file:
 
 ```php
