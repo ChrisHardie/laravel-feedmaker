@@ -4,6 +4,7 @@ namespace ChrisHardie\Feedmaker;
 
 use ChrisHardie\Feedmaker\Commands\FeedmakerCommand;
 use ChrisHardie\Feedmaker\Http\SourceController;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -28,6 +29,18 @@ class FeedmakerServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->registerRouteMacro();
+    }
+
+    public function packageBooted(): void
+    {
+        $this->scheduleFeedUpdates();
+    }
+
+    protected function scheduleFeedUpdates(): void
+    {
+        $this->app->afterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('feeds:update')->everyFiveMinutes();
+        });
     }
 
     protected function registerRouteMacro(): self
