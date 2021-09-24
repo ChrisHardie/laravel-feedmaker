@@ -83,7 +83,7 @@ abstract class BaseSource
     public function writeRssItemsToFile(RssItemCollection $rssItems, Source $source): void
     {
         $rssXml = View::make(
-            'rss',
+            'feedmaker::feedrss',
             [
                 'source' => $source,
                 'lastUpdated' => $this->lastUpdated($rssItems),
