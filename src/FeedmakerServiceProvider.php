@@ -3,6 +3,7 @@
 namespace ChrisHardie\Feedmaker;
 
 use ChrisHardie\Feedmaker\Http\SourceController;
+use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use ChrisHardie\Feedmaker\Commands\FeedmakerCommand;
@@ -29,14 +30,12 @@ class FeedmakerServiceProvider extends PackageServiceProvider
         $this->registerRouteMacro();
     }
 
-    protected function registerRouteMacro(): void
+    protected function registerRouteMacro(): self
     {
-        $router = $this->app['router'];
-
-        $router->macro('feeds', function ($baseUrl = '') use ($router) {
-            $url = url(config('feedmaker.url'));
-
-            $router->get($url, '\\'.SourceController::class)->name("feedmaker.index");
+        Route::macro('feedsindex', function () {
+            Route::get(config('feedmaker.url'), '\\' . SourceController::class)->name('feedmaker.index');
         });
+
+        return $this;
     }
 }
