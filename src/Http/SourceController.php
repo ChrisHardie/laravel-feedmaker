@@ -13,7 +13,7 @@ class SourceController
      */
     public function __invoke()
     {
-        return view('welcome', [
+        return view('feedsindex', [
             'sources' => Source::where('active', true)->whereNotNull('last_succeed_at')->orderByDesc('last_succeed_at')->get()
         ]);
     }
