@@ -29,9 +29,6 @@ abstract class BaseSource
             return null;
         }
 
-        $source->last_check_at = Carbon::now();
-        $source->save();
-
         if (empty($url)) {
             $url = $source->source_url;
         }
@@ -59,9 +56,6 @@ abstract class BaseSource
         if (empty($source->source_url) && empty($url)) {
             return null;
         }
-
-        $source->last_check_at = Carbon::now();
-        $source->save();
 
         if (empty($url)) {
             $url = $source->source_url;

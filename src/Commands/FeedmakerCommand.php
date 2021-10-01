@@ -4,6 +4,7 @@ namespace ChrisHardie\Feedmaker\Commands;
 
 use ChrisHardie\Feedmaker\Models\Source;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class FeedmakerCommand extends Command
@@ -53,6 +54,9 @@ class FeedmakerCommand extends Command
             $source_class_path = $source_class_base_path . $source->class_name . '\\' . $source->class_name;
             if (class_exists($source_class_path)) {
                 $source_class = new $source_class_path();
+
+                $source->last_check_at = Carbon::now();
+                $source->save();
 
                 try {
                     $rssItems = $source_class->generateRssItems($source);
