@@ -14,7 +14,7 @@
                 <title><![CDATA[{{ $item['title'] }}]]></title>
                 <link>{!! $item['url'] !!}</link>
                 <description><![CDATA[{!! $item['description'] !!}]]></description>
-                @if($item['guid'])
+                @if(! empty($item['guid']))
                 <guid>{!! $item['guid'] !!}</guid>
                 @else
                 <guid>{!! $item['url'] !!}</guid>
