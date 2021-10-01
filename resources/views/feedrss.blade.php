@@ -12,9 +12,9 @@
         @foreach($items as $item)
             <item>
                 <title><![CDATA[{{ $item['title'] }}]]></title>
-                <link>{{ url($item['url']) }}</link>
+                <link>{!! $item['url'] !!}</link>
                 <description><![CDATA[{!! $item['description'] !!}]]></description>
-                <guid>{{ url($item['url']) }}</guid>
+                <guid>{!! $item['url'] !!}</guid>
                 <pubDate>{{ $item['pubDate']->format('Y-m-d H:i:s O') }}</pubDate>
             </item>
         @endforeach
