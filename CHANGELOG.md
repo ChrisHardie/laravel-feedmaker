@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
+## 1.0.2 - 2021-10-01
+
+- fix: empty check in blade template for guid
+
 ## 1.0.1 - 2021-10-01
 
 - enhancement: support guids different from url in RSS construction
