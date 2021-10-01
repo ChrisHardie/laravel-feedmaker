@@ -151,6 +151,10 @@ The RssItemCollection must contain the following keys for each item:
 * url: string
 * description: string
 
+Optionally, it can also contain these keys:
+
+* guid: a URL that will become the unique/GUID for the RSS item instead of the url
+
 Then, you can force a check of your source and generate a corresponding feed:
 
 `$ artisan feeds:update YourSource`
