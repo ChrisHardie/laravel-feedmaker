@@ -12,7 +12,7 @@
         @foreach($items as $item)
             <item>
                 <title><![CDATA[{{ $item['title'] }}]]></title>
-                <link>{!! $item['url'] !!}</link>
+                <link>{{ $item['url'] }}</link>
                 <description><![CDATA[{!! $item['description'] !!}]]></description>
                 @if(! empty($item['guid']))
                 <guid>{!! $item['guid'] !!}</guid>
