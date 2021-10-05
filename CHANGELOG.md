@@ -2,11 +2,11 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
-## 1.0.4 - 2020-10-05
+## 1.0.4 - 2021-10-05
 
 - fix: encode HTML entities in RSS item links
 
-## 1.0.3 - 2020-10-01
+## 1.0.3 - 2021-10-01
 
 - fix: update last checked when update command runs, not within base class functions
 
