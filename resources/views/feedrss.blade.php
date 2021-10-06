@@ -15,9 +15,9 @@
                 <link>{{ $item['url'] }}</link>
                 <description><![CDATA[{!! $item['description'] !!}]]></description>
                 @if(! empty($item['guid']))
-                <guid>{!! $item['guid'] !!}</guid>
+                <guid>{{ $item['guid'] }}</guid>
                 @else
-                <guid>{!! $item['url'] !!}</guid>
+                <guid>{{ $item['url'] }}</guid>
                 @endif
                 <pubDate>{{ $item['pubDate']->format('Y-m-d H:i:s O') }}</pubDate>
             </item>

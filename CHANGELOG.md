@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
+## 1.0.5 - 2021-10-06
+
+- fix: encode HTML entities in RSS item guid field
+
 ## 1.0.4 - 2021-10-05
 
 - fix: encode HTML entities in RSS item links
