@@ -11,7 +11,7 @@
         <pubDate>{{ $lastUpdated }}</pubDate>
         @foreach($items as $item)
             <item>
-                <title><![CDATA[{{ $item['title'] }}]]></title>
+                <title>{{ $item['title'] }}</title>
                 <link>{{ $item['url'] }}</link>
                 <description><![CDATA[{!! $item['description'] !!}]]></description>
                 @if(! empty($item['guid']))
