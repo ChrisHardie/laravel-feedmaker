@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
+## 1.0.6 - 2024-01-03
+
+- fix: update model attribute casting for modern Laravel
+
 ## 1.0.5 - 2021-10-06
 
 - fix: encode HTML entities in RSS item guid field
