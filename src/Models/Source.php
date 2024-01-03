@@ -25,11 +25,11 @@ class Source extends Model
         'next_check_after',
     ];
 
-    protected $dates = [
-        'last_check_at',
-        'last_succeed_at',
-        'last_fail_at',
-        'next_check_after',
+    protected $casts = [
+        'last_check_at' => 'datetime',
+        'last_succeed_at' => 'datetime',
+        'last_fail_at' => 'datetime',
+        'next_check_after' => 'datetime',
     ];
 
     public function getBaseUrlAttribute($value)
