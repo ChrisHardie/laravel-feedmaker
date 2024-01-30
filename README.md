@@ -81,6 +81,7 @@ $ artisan tinker
 >>> $s->source_url = 'https://www.example.com/news'
 >>> $s->name = 'Source Name'
 >>> $s->home_url = 'https://example.com/'
+>>> $s->frequency = 60
 >>> $s->save();
 ```
 
