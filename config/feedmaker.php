@@ -6,4 +6,8 @@ return [
 
     // Feed index web route
     'url' => '/',
+
+    // Threshold of repeated failures for treating not crawlable exceptions
+    // as warnings instead of debug messages
+    'feed_exception_min_for_warnings' => 4,
 ];

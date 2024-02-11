@@ -43,15 +43,19 @@ class SourceNotCrawlable extends Exception
             'next_check_after' => Carbon::now()->addMinutes(3 ** $new_fail_count),
         ]);
 
-        Log::warning(
-            sprintf(
-                'Updating source `%s` has failed %d %s, waiting at least %s for next check: %s',
-                $this->source->name,
-                $this->source->fail_count,
-                Str::plural('time', $this->source->fail_count),
-                $this->source->next_check_after->diffForHumans(),
-                $message
-            ),
+        $message = sprintf(
+            'Updating source `%s` has failed %d %s, waiting at least %s for next check: %s',
+            $this->source->name,
+            $this->source->fail_count,
+            Str::plural('time', $this->source->fail_count),
+            $this->source->next_check_after->diffForHumans(),
+            $message
         );
+
+        if ($this->source->fail_count < config('feedmaker.feed_exception_min_for_warnings')) {
+            Log::debug($message);
+        } else {
+            Log::warning($message);
+        }
     }
 }
