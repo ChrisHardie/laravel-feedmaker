@@ -90,12 +90,17 @@ abstract class BaseSource
         Storage::disk('feedmaker')->put($source->rss_filename, $rssXml->render(), 'public');
 
         if (0 < $source->fail_count) {
-            Log::info(sprintf(
+            $message = sprintf(
                 'Updating feed for source `%s` was successful after %d %s.',
                 $source->name,
                 $source->fail_count,
                 Str::plural('failure', $source->fail_count)
-            ));
+            );
+            if ($source->fail_count >= config('feedmaker.feed_exception_min_for_warnings')) {
+                Log::info($message);
+            } else {
+                Log::debug($message);
+            }
         }
 
         $source->update([
