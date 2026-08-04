@@ -2,6 +2,7 @@
 
 namespace ChrisHardie\Feedmaker\Models;
 
+use ChrisHardie\Feedmaker\Support\DatabaseQueryHelper;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,14 @@ class Source extends Model
     ];
 
     protected $fillable = [
+        'class_name',
+        'source_url',
+        'name',
+        'base_url',
+        'home_url',
+        'frequency',
+        'respect_timestamp',
+        'active',
         'fail_count',
         'last_check_at',
         'last_succeed_at',
@@ -66,9 +75,13 @@ class Source extends Model
             $query
                 // Never been checked
                 ->whereNull('last_check_at')
-                // Haven't been checked in the last X minutes given sitewide update frequency
-                // Haven't been checked in the last X minutes given feed-specific update frequency
-                ->orWhereRaw('last_check_at <= DATE_SUB(UTC_TIMESTAMP(), INTERVAL frequency MINUTE)');
+                ->orWhereRaw(
+                    DatabaseQueryHelper::timestampOlderThanColumnMinutesExpression(
+                        'last_check_at',
+                        'frequency',
+                        $query->getConnection()->getDriverName()
+                    )
+                );
         });
 
         // Sources where no next check is set or where it has passed.
