@@ -28,6 +28,10 @@ class FeedmakerServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
+        $this->app->singleton('feedmaker', function () {
+            return new Feedmaker();
+        });
+
         $this->registerRouteMacro();
     }
 
