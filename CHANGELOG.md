@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
+## 1.0.7 - 2026-08-04
+
+- enhancement: Add comprehensive Pest test suite
+- enhancement: Add DatabaseQueryHelper for cross-database compatibility
+- fix: Resolve ViewException in RSS feed when home_url is missing
+- fix: Improve exception reporting and recovery logic
+
 ## 1.0.6 - 2024-01-03
 
 - fix: update model attribute casting for modern Laravel

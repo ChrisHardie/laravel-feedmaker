@@ -4,9 +4,9 @@
 ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <atom:link href="{{ url($source['home_url']) }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ url($source['home_url'] ?? '/') }}" rel="self" type="application/rss+xml" />
         <title><![CDATA[{{ $source['name'] }}]]></title>
-        <link><![CDATA[{{ url($source['home_url']) }}]]></link>
+        <link><![CDATA[{{ url($source['home_url'] ?? '/') }}]]></link>
         <description><![CDATA[{{ $source['name'] }}]]></description>
         <pubDate>{{ $lastUpdated }}</pubDate>
         @foreach($items as $item)

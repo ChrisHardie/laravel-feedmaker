@@ -45,3 +45,24 @@ test('checkable scope filters correctly', function () {
 
     expect(Source::checkable()->count())->toBe(2);
 });
+
+test('checkable scope respects next_check_after', function () {
+    // Active and next_check_after is null
+    Source::factory()->create(['active' => true, 'next_check_after' => null, 'last_check_at' => null]);
+    
+    // Active but next_check_after is in the future
+    Source::factory()->create([
+        'active' => true, 
+        'next_check_after' => Carbon::now()->addMinutes(10),
+        'last_check_at' => null
+    ]);
+    
+    // Active and next_check_after is in the past
+    Source::factory()->create([
+        'active' => true, 
+        'next_check_after' => Carbon::now()->subMinutes(10),
+        'last_check_at' => null
+    ]);
+
+    expect(Source::checkable()->count())->toBe(2);
+});

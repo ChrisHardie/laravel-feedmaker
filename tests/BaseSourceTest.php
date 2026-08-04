@@ -6,6 +6,7 @@ use ChrisHardie\Feedmaker\Sources\RssItemCollection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use ChrisHardie\Feedmaker\Exceptions\SourceNotCrawlable;
 
 class TestBaseSource extends BaseSource
@@ -96,4 +97,35 @@ test('it writes rss items to file', function () {
     $baseSource->writeRssItemsToFile($items, $source);
     
     Storage::disk('feedmaker')->assertExists('testsource.rss');
+});
+
+test('it resets fail count and logs on successful write after failure', function () {
+    Storage::fake('feedmaker');
+    Log::shouldReceive('info')->once();
+    
+    $source = Source::factory()->create([
+        'name' => 'Test Source',
+        'class_name' => 'TestSource',
+        'fail_count' => 5,
+        'next_check_after' => Carbon::now()->addDay(),
+    ]);
+    
+    config(['feedmaker.feed_exception_min_for_warnings' => 2]);
+    
+    $items = RssItemCollection::make([
+        [
+            'title' => 'Test Item',
+            'pubDate' => Carbon::now(),
+            'url' => 'http://example.com/item',
+            'description' => 'Test Description',
+        ]
+    ]);
+    
+    $baseSource = new TestBaseSource();
+    $baseSource->writeRssItemsToFile($items, $source);
+    
+    $source->refresh();
+    expect($source->fail_count)->toBe(0);
+    expect($source->next_check_after)->toBeNull();
+    expect($source->last_succeed_at)->not->toBeNull();
 });
