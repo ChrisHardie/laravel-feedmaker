@@ -28,9 +28,12 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-feedmaker_table.php.stub';
+        config()->set('filesystems.disks.feedmaker', [
+            'driver' => 'local',
+            'root' => __DIR__ . '/temp',
+        ]);
+
+        $migration = include __DIR__.'/../database/migrations/create_feedmaker_table.php.stub';
         $migration->up();
-        */
     }
 }
