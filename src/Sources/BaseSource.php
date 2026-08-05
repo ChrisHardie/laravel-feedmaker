@@ -4,13 +4,13 @@ namespace ChrisHardie\Feedmaker\Sources;
 
 use ChrisHardie\Feedmaker\Exceptions\SourceNotCrawlable;
 use ChrisHardie\Feedmaker\Models\Source;
-use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\UriResolver;
 
 abstract class BaseSource
