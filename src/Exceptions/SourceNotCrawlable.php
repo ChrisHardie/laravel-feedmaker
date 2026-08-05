@@ -12,7 +12,7 @@ class SourceNotCrawlable extends Exception
 {
     protected Source $source;
 
-    public function __construct($message, $code, $previousException, $source)
+    public function __construct(string $message, int $code = 0, ?\Throwable $previousException = null, ?Source $source = null)
     {
         parent::__construct($message, $code, $previousException);
         $this->source = $source;
@@ -39,7 +39,7 @@ class SourceNotCrawlable extends Exception
         $this->source->update([
             'fail_count' => $new_fail_count,
             'last_fail_at' => Carbon::now(),
-            'last_fail_reason' => $this->message,
+            'last_fail_reason' => $this->getMessage(),
             'next_check_after' => Carbon::now()->addMinutes(3 ** $new_fail_count),
         ]);
 

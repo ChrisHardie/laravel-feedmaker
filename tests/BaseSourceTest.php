@@ -62,6 +62,20 @@ test('getUrl throws SourceNotCrawlable on failure', function () {
         ->toThrow(SourceNotCrawlable::class);
 });
 
+test('it can get crawler using http facade', function () {
+    Http::fake([
+        'http://example.com' => Http::response('<html><body><h1>Test</h1></body></html>', 200),
+    ]);
+
+    $source = new Source(['source_url' => 'http://example.com']);
+    $baseSource = new TestBaseSource();
+
+    $crawler = $baseSource->getCrawler($source);
+
+    expect($crawler)->toBeInstanceOf(\Symfony\Component\DomCrawler\Crawler::class)
+        ->and($crawler->filter('h1')->text())->toBe('Test');
+});
+
 test('it returns correct last updated string', function () {
     $items = RssItemCollection::make([
         ['pubDate' => Carbon::parse('2023-01-01 10:00:00')],

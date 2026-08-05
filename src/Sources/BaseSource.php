@@ -4,13 +4,13 @@ namespace ChrisHardie\Feedmaker\Sources;
 
 use ChrisHardie\Feedmaker\Exceptions\SourceNotCrawlable;
 use ChrisHardie\Feedmaker\Models\Source;
-use Goutte\Client;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\UriResolver;
 
 abstract class BaseSource
@@ -34,7 +34,7 @@ abstract class BaseSource
         }
 
         try {
-            return HTTP::get($url);
+            return Http::get($url);
         } catch (\Exception $e) {
             throw new SourceNotCrawlable(
                 'Problem running GET request: ' . $e->getMessage(),
@@ -48,10 +48,10 @@ abstract class BaseSource
     /**
      * @param Source $source
      * @param null   $url Optional URL to override default source URL
-     * @return \Symfony\Component\DomCrawler\Crawler|null
+     * @return Crawler|null
      * @throws SourceNotCrawlable
      */
-    public function getCrawler(Source $source, $url = null): ?\Symfony\Component\DomCrawler\Crawler
+    public function getCrawler(Source $source, $url = null): ?Crawler
     {
         if (empty($source->source_url) && empty($url)) {
             return null;
@@ -62,9 +62,9 @@ abstract class BaseSource
         }
 
         try {
-            $client = new Client();
+            $response = Http::get($url);
 
-            return $client->request('GET', $url);
+            return new Crawler($response->body(), $url);
         } catch (\Exception $e) {
             throw new SourceNotCrawlable(
                 'Problem running GET request: ' . $e->getMessage(),
