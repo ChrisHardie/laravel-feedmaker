@@ -38,7 +38,7 @@ class FeedmakerCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         if (! empty($this->argument('class_name'))) {
             $sources = Source::where('class_name', $this->argument('class_name'))->get();
@@ -66,5 +66,7 @@ class FeedmakerCommand extends Command
                 }
             }
         }
+
+        return self::SUCCESS;
     }
 }

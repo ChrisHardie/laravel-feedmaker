@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-feedmaker` will be documented in this file.
 
+## 1.0.8 - 2026-08-05
+
+- enhancement: Add compatibility for PHP 8.5 and Laravel 13
+- enhancement: Modernize test configuration and PHP type hints
+
 ## 1.0.7 - 2026-08-04
 
 - enhancement: Add comprehensive Pest test suite
