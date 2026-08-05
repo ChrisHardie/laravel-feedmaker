@@ -13,6 +13,7 @@ class TestSource extends BaseSource
     public function generateRssItems(Source $source): RssItemCollection
     {
         self::$called = true;
+
         return RssItemCollection::make([]);
     }
 }
@@ -33,10 +34,9 @@ class FailingSource extends BaseSource
 
 namespace ChrisHardie\Feedmaker\Tests;
 
-use ChrisHardie\Feedmaker\Models\Source;
 use App\Sources\TestSource\TestSource;
+use ChrisHardie\Feedmaker\Models\Source;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 
 uses(RefreshDatabase::class);
@@ -54,7 +54,7 @@ test('the feeds:update command calls the source class', function () {
     Artisan::call('feeds:update', ['class_name' => 'TestSource']);
 
     expect(TestSource::$called)->toBeTrue();
-    
+
     $source->refresh();
     expect($source->last_check_at)->not->toBeNull();
 });
@@ -79,10 +79,10 @@ test('the feeds:update command processes checkable sources', function () {
     Artisan::call('feeds:update');
 
     expect(TestSource::$called)->toBeTrue();
-    
+
     $source1->refresh();
     $source2->refresh();
-    
+
     expect($source1->last_check_at)->not->toBeNull();
     expect($source2->last_check_at)->toBeNull();
 });

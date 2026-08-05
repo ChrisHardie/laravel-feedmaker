@@ -2,16 +2,16 @@
 
 use ChrisHardie\Feedmaker\Exceptions\SourceNotCrawlable;
 use ChrisHardie\Feedmaker\Models\Source;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
 test('reporting SourceNotCrawlable updates the source model', function () {
     $source = Source::factory()->create([
         'fail_count' => 0,
-        'name' => 'Test Source'
+        'name' => 'Test Source',
     ]);
 
     $exception = new SourceNotCrawlable('Test Failure', 0, null, $source);
@@ -22,7 +22,7 @@ test('reporting SourceNotCrawlable updates the source model', function () {
     expect($source->last_fail_at)->not->toBeNull();
     expect($source->last_fail_reason)->toBe('Test Failure');
     expect($source->next_check_after)->not->toBeNull();
-    
+
     // 3^1 = 3 minutes
     $expectedNextCheck = Carbon::now()->addMinutes(3);
     expect($source->next_check_after->diffInMinutes($expectedNextCheck))->toBeLessThanOrEqual(1);
@@ -38,7 +38,7 @@ test('it calculates exponential backoff correctly', function () {
 
     $source->refresh();
     expect($source->fail_count)->toBe(3);
-    
+
     // 3^3 = 27 minutes
     $expectedNextCheck = Carbon::now()->addMinutes(27);
     expect($source->next_check_after->diffInMinutes($expectedNextCheck))->toBeLessThanOrEqual(1);
@@ -50,7 +50,7 @@ test('it logs as debug when fail count is below threshold', function () {
 
     $source = Source::factory()->create([
         'fail_count' => 0, // Will become 1
-        'name' => 'Test Source'
+        'name' => 'Test Source',
     ]);
 
     config(['feedmaker.feed_exception_min_for_warnings' => 2]);
@@ -65,7 +65,7 @@ test('it logs as warning when fail count reaches threshold', function () {
 
     $source = Source::factory()->create([
         'fail_count' => 1, // Will become 2
-        'name' => 'Test Source'
+        'name' => 'Test Source',
     ]);
 
     config(['feedmaker.feed_exception_min_for_warnings' => 2]);
@@ -81,7 +81,7 @@ test('it includes previous exception message in report', function () {
 
     $source = Source::factory()->create([
         'fail_count' => 0,
-        'name' => 'Test Source'
+        'name' => 'Test Source',
     ]);
 
     $prev = new Exception('Previous Error');

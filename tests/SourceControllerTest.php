@@ -1,9 +1,9 @@
 <?php
 
 use ChrisHardie\Feedmaker\Models\Source;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
@@ -21,23 +21,23 @@ test('it displays active sources with last_succeed_at', function () {
     $activeSource = Source::factory()->create([
         'active' => true,
         'last_succeed_at' => Carbon::now()->subDay(),
-        'name' => 'Active Source'
+        'name' => 'Active Source',
     ]);
 
     $inactiveSource = Source::factory()->create([
         'active' => false,
         'last_succeed_at' => Carbon::now()->subDay(),
-        'name' => 'Inactive Source'
+        'name' => 'Inactive Source',
     ]);
 
     $neverSucceededSource = Source::factory()->create([
         'active' => true,
         'last_succeed_at' => null,
-        'name' => 'Never Succeeded Source'
+        'name' => 'Never Succeeded Source',
     ]);
 
     $response = $this->get('/feeds');
-    
+
     $response->assertOk();
     $response->assertViewIs('feedmaker::feedsindex');
     $response->assertViewHas('sources', function ($sources) use ($activeSource) {

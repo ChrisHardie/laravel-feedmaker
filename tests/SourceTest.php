@@ -1,8 +1,8 @@
 <?php
 
 use ChrisHardie\Feedmaker\Models\Source;
-use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 
 uses(RefreshDatabase::class);
 
@@ -25,22 +25,22 @@ test('it has a base url attribute that falls back correctly', function () {
 test('checkable scope filters correctly', function () {
     // Active and never checked
     Source::factory()->create(['active' => true, 'last_check_at' => null]);
-    
+
     // Inactive
     Source::factory()->create(['active' => false]);
-    
+
     // Active but checked recently (within 60 min frequency)
     Source::factory()->create([
-        'active' => true, 
+        'active' => true,
         'last_check_at' => Carbon::now()->subMinutes(30),
-        'frequency' => 60
+        'frequency' => 60,
     ]);
-    
+
     // Active and checked long ago
     Source::factory()->create([
-        'active' => true, 
+        'active' => true,
         'last_check_at' => Carbon::now()->subMinutes(90),
-        'frequency' => 60
+        'frequency' => 60,
     ]);
 
     expect(Source::checkable()->count())->toBe(2);
@@ -49,19 +49,19 @@ test('checkable scope filters correctly', function () {
 test('checkable scope respects next_check_after', function () {
     // Active and next_check_after is null
     Source::factory()->create(['active' => true, 'next_check_after' => null, 'last_check_at' => null]);
-    
+
     // Active but next_check_after is in the future
     Source::factory()->create([
-        'active' => true, 
+        'active' => true,
         'next_check_after' => Carbon::now()->addMinutes(10),
-        'last_check_at' => null
+        'last_check_at' => null,
     ]);
-    
+
     // Active and next_check_after is in the past
     Source::factory()->create([
-        'active' => true, 
+        'active' => true,
         'next_check_after' => Carbon::now()->subMinutes(10),
-        'last_check_at' => null
+        'last_check_at' => null,
     ]);
 
     expect(Source::checkable()->count())->toBe(2);
