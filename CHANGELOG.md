@@ -4,6 +4,7 @@ All notable changes to `laravel-feedmaker` will be documented in this file.
 
 ## 1.0.8 - 2026-08-05
 
+- enhancement: Replace archived `fabpot/goutte` with Laravel Http client and Symfony DomCrawler
 - enhancement: Add compatibility for PHP 8.5 and Laravel 13
 - enhancement: Modernize test configuration and PHP type hints
 

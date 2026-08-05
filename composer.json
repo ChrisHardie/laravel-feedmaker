@@ -20,9 +20,10 @@
     ],
     "require": {
         "php": "^8.2",
-        "fabpot/goutte": "^4.0",
         "masterminds/html5": "^2.7",
-        "spatie/laravel-package-tools": "^1.16"
+        "spatie/laravel-package-tools": "^1.16",
+        "symfony/css-selector": "^6.4 || ^7.0",
+        "symfony/dom-crawler": "^6.4 || ^7.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.8",
